@@ -56,7 +56,6 @@ BTreeNode::BTreeNode(int t1, bool leaf1) {
     n = 0;
 }
 
-// Find the key
 int BTreeNode::findKey(int k) {
     int idx = 0;
     while (idx < n && keys[idx] < k)
@@ -64,7 +63,7 @@ int BTreeNode::findKey(int k) {
     return idx;
 }
 
-// Deletion operation
+
 void BTreeNode::deletion(int k) {
     int idx = findKey(k);
 
@@ -92,7 +91,7 @@ void BTreeNode::deletion(int k) {
     return;
 }
 
-// Remove from the leaf
+
 void BTreeNode::removeFromLeaf(int idx) {
     for (int i = idx + 1; i < n; ++i)
         keys[i - 1] = keys[i];
@@ -102,7 +101,7 @@ void BTreeNode::removeFromLeaf(int idx) {
     return;
 }
 
-// Delete from non leaf node
+
 void BTreeNode::removeFromNonLeaf(int idx) {
     int k = keys[idx];
 
@@ -157,7 +156,7 @@ void BTreeNode::fill(int idx) {
     return;
 }
 
-// Borrow from previous
+
 void BTreeNode::borrowFromPrev(int idx) {
     BTreeNode* child = C[idx];
     BTreeNode* sibling = C[idx - 1];
@@ -183,7 +182,7 @@ void BTreeNode::borrowFromPrev(int idx) {
     return;
 }
 
-// Borrow from the next
+
 void BTreeNode::borrowFromNext(int idx) {
     BTreeNode* child = C[idx];
     BTreeNode* sibling = C[idx + 1];
@@ -209,7 +208,7 @@ void BTreeNode::borrowFromNext(int idx) {
     return;
 }
 
-// Merge
+
 void BTreeNode::merge(int idx) {
     BTreeNode* child = C[idx];
     BTreeNode* sibling = C[idx + 1];
@@ -237,7 +236,6 @@ void BTreeNode::merge(int idx) {
     return;
 }
 
-// Insertion operation
 void BTree::insertion(int k) {
     if (root == NULL) {
         root = new BTreeNode(t, true);
@@ -264,7 +262,7 @@ void BTree::insertion(int k) {
     }
 }
 
-// Insertion non full
+
 void BTreeNode::insertNonFull(int k) {
     int i = n - 1;
 
@@ -291,7 +289,7 @@ void BTreeNode::insertNonFull(int k) {
     }
 }
 
-// Split child
+
 void BTreeNode::splitChild(int i, BTreeNode* y) {
     BTreeNode* z = new BTreeNode(y->t, y->leaf);
     z->n = t - 1;
@@ -320,7 +318,7 @@ void BTreeNode::splitChild(int i, BTreeNode* y) {
 }
 
 
-// Delete Operation
+
 void BTree::deletion(int k) {
     if (!root) {
         cout << "The tree is empty\n";
